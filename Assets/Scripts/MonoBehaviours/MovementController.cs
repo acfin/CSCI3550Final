@@ -21,6 +21,7 @@ public class MovementController : MonoBehaviour
 
     // reference to the character's Rigidbody2D component
     Rigidbody2D rb2D;
+    private BoxCollider2D bc2D;
 
     // use this for initialization
     private void Start()
@@ -28,16 +29,29 @@ public class MovementController : MonoBehaviour
         // get references to game object components so they don't have to be grabbed each time they are needed
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
+        bc2D = GetComponent<BoxCollider2D>();
     }
 
     // called once per frame
     private void Update()
     {
-        if (Input.GetButtonDown("Jump") && canJump)
+        if (Input.GetButtonDown("Jump") && CanJump())
         {
+            
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             canJump = false;
         }
+
+        // update the animation state machine
+        //UpdateState();
+
+    }
+
+    // called at fixed intervals by the Unity engine
+    // update may be called less frequently on slower hardware when frame rate slows down
+    void FixedUpdate()
+    {
+
 
         if (rb.velocity.y >= 0)
         {
@@ -49,15 +63,6 @@ public class MovementController : MonoBehaviour
             rb.gravityScale = fallingGravity;
         }
         
-        // update the animation state machine
-        //UpdateState();
-
-    }
-
-    // called at fixed intervals by the Unity engine
-    // update may be called less frequently on slower hardware when frame rate slows down
-    void FixedUpdate()
-    {
         MoveCharacter();
         /*if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -93,6 +98,18 @@ public class MovementController : MonoBehaviour
         if (collision.gameObject.tag == "Pit")
         {
             Debug.Log("In the void! This will kill you later.");
+        }
+    }
+
+    private bool CanJump()
+    {
+        if (bc2D.IsTouchingLayers(11))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

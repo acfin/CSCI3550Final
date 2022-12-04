@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1831428069
-  m_SortingLayer: 3
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 1164766312, guid: 9c169f36fc893a645badaaaf715010e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -102,7 +102,7 @@ MonoBehaviour:
   rb: {fileID: 144455285937515741}
   jumpForce: 20
   jumpGravity: 5
-  fallingGravity: 12
+  fallingGravity: 10
   movementSpeed: 6
 --- !u!50 &144455285937515741
 Rigidbody2D:
@@ -121,7 +121,7 @@ Rigidbody2D:
   m_AngularDrag: 0
   m_GravityScale: 10
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
