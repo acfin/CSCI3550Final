@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 144455285937515736}
   - component: {fileID: 144455285937515741}
   - component: {fileID: 144455285937515740}
+  - component: {fileID: 4024076822929399259}
+  - component: {fileID: 3613307776872479769}
   m_Layer: 7
   m_Name: PlayerObject
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,3 +153,35 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.9951715, y: 5.71}
   m_EdgeRadius: 0
+--- !u!114 &4024076822929399259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144455285937515737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560e95609784c2b4a946a236b7048789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitPoints: 2
+  maxHitPoints: 2
+  startingHitPoints: 2
+  characterCategory: 0
+  healthBarPrefab: {fileID: 6882714568892732208, guid: e0815819682bd0240bb06d539a83182d, type: 3}
+--- !u!114 &3613307776872479769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144455285937515737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718c80a6c940b3647b4ddb83eeeb96b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ammoPrefab: {fileID: 918581420596053488, guid: 461fb254af3b7d9468ada3b1ac0024e0, type: 3}
+  poolSize: 7
+  weaponVelocity: 3

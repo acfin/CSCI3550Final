@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UIElements;
 
 public class PlatformGameManager : MonoBehaviour
 {
@@ -12,6 +13,12 @@ public class PlatformGameManager : MonoBehaviour
 
     // A variable used to access the singleton object
     public static PlatformGameManager sharedInstance = null;
+
+    public Canvas GameOverCanvas;
+    public Canvas WinCanvas;
+    
+    private bool created = false;
+    private Canvas gameOver;
 
     // Ensure only a single instance of the RPGGameManager exists
     // It's possible to get multiple instances if multiple copies of the RPGGameManager exists in the Hierarchy
@@ -55,6 +62,32 @@ public class PlatformGameManager : MonoBehaviour
 
             // Set the virtual camera to follow the player that was just spawned
             virtualCamera.Follow = player.transform;
+        }
+    }
+    
+    private void Update()
+    {
+        // Exit the application if the user presses the "escape" key
+        // Does not work when playing from inside the Unity editor
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+        
+        // Respawn if dead by pressing R
+        if (!GameObject.FindGameObjectWithTag("Player"))
+        {
+            if (!created)
+            {
+                gameOver = Instantiate(GameOverCanvas);
+                created = true;
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                SetupScene();
+                Destroy(gameOver.gameObject);
+                created = false;
+            }
         }
     }
 }

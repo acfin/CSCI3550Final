@@ -9,9 +9,6 @@ public class MovementController : MonoBehaviour
     public float jumpGravity = 10;
     public float fallingGravity = 40;
     public float movementSpeed = 3.0f;
-   
-    // Variable is true if player is touching ground. False if in air.
-    private bool canJump = true;
 
     // holds 2D points; used to represent a character's location in 2D space, or where it's moving to
     private float movement;
@@ -22,6 +19,7 @@ public class MovementController : MonoBehaviour
     // reference to the character's Rigidbody2D component
     Rigidbody2D rb2D;
     private BoxCollider2D bc2D;
+    Coroutine damageCoroutine;
 
     // use this for initialization
     private void Start()
@@ -30,6 +28,7 @@ public class MovementController : MonoBehaviour
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
         bc2D = GetComponent<BoxCollider2D>();
+        
     }
 
     // called once per frame
@@ -39,7 +38,6 @@ public class MovementController : MonoBehaviour
         {
             
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            canJump = false;
         }
 
         // update the animation state machine
@@ -87,23 +85,11 @@ public class MovementController : MonoBehaviour
         animator.SetFloat("xDir", movement.x);
         animator.SetFloat("yDir", movement.y);
     }*/
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            canJump = true;
-        }
-
-        if (collision.gameObject.tag == "Pit")
-        {
-            Debug.Log("In the void! This will kill you later.");
-        }
-    }
+    
 
     private bool CanJump()
     {
-        if (bc2D.IsTouchingLayers(11))
+        if (bc2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             return true;
         }

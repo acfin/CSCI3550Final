@@ -8,6 +8,7 @@ TagManager:
   - PlayerChar
   - Enemy
   - Pit
+  - CanBePickedUp
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - 
   - Ground
   - 
-  - 
+  - Consumables
   - 
   - 
   - 
@@ -59,4 +60,7 @@ TagManager:
     locked: 0
   - name: Character
     uniqueID: 2463539227
+    locked: 0
+  - name: Fringe
+    uniqueID: 650701991
     locked: 0
