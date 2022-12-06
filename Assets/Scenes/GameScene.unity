@@ -1754,7 +1754,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1457451507
 BoxCollider2D:
@@ -6247,7 +6247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4518877827201608243, guid: d58d0414e311dd746aa67422969072f1, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4518877827201608243, guid: d58d0414e311dd746aa67422969072f1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6298,6 +6298,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2672502662234631405, guid: cb153ca17323c934982108457f1bfda3, type: 3}
+      propertyPath: m_Text
+      value: "Objective: Traverse the platforms\n            and defeat the ghost!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2672502662234631405, guid: cb153ca17323c934982108457f1bfda3, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 5128809909079684484, guid: cb153ca17323c934982108457f1bfda3, type: 3}
       propertyPath: m_Name
       value: Objective
