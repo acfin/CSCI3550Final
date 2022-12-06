@@ -8,7 +8,7 @@ public abstract class Character : MonoBehaviour
     public float hitPoints;
     public float maxHitPoints;
     public float startingHitPoints;
-
+    
     public enum CharacterCategory
     {
         PLAYER,
@@ -24,18 +24,26 @@ public abstract class Character : MonoBehaviour
     }
 
     // Set the character back to its original state
-    public abstract void ResetCharacter();
+    public virtual void ResetCharacter()
+    {
+        hitPoints = startingHitPoints;
+    }
 
     // Coroutine to inflict an amount of damage to the character over a period of time
     // interval = 0 to inflict a one-time damage hit
     // interval > 0 to continuously inflict damage at the set interval of time
-    public IEnumerator DamageCharacter(int damage, float interval)
+    public IEnumerator DamageCharacter(int damage, float interval, Animator animator)
     {
         // Continuously inflict damage until the loop breaks
         while (true)
         {
             // Inflict damage
             hitPoints = hitPoints - damage;
+            if (animator != null)
+            {
+                animator.SetTrigger("hurt");
+            }
+
 
             // Player is dead; kill off game object and exit loop
             if (hitPoints <= 0)

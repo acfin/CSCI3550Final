@@ -179,7 +179,7 @@ public class Wander : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // Enemy is confused and pauses for a minute after losing sight of the player
-            animator.SetBool("isWalking", false);
+            //animator.SetBool("isWalking", false);
 
             // Slow the speed down
             currentSpeed = wanderSpeed;

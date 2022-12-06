@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,9 @@ public class Enemy : Character
     // Reference to a running coroutine
     Coroutine damageCoroutine;
 
+    Animator animator;
+    private Animator targetAnimator;
+
     private void OnEnable()
     {
         ResetCharacter();
@@ -17,26 +21,29 @@ public class Enemy : Character
 
     public override void ResetCharacter()
     {
+        animator = GetComponent<Animator>();
         hitPoints = startingHitPoints;
     }
 
     // Called by the Unity engine whenever the current enemy object's Collider2D makes contact with another object's Collider2D
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
         // See if the enemy has collided with the player
         if (collision.gameObject.CompareTag("Player"))
         {
             // Get a reference to the colliding player object
             Player player = collision.gameObject.GetComponent<Player>();
+            targetAnimator = player.GetComponent<Animator>();
 
             // If coroutine is not currently executing
             if (damageCoroutine == null)
             {
                 // Start the coroutine to inflict damage to the player every 1 second
-                damageCoroutine = StartCoroutine(player.DamageCharacter(damageStrength, 1.0f));
+                damageCoroutine = StartCoroutine(player.DamageCharacter(damageStrength, 1.0f, targetAnimator));
             }
         }
+
     }
 
     // Called by the Unity engine whenever the current enemy object stops touching another object's Collider2D
@@ -52,5 +59,11 @@ public class Enemy : Character
                 damageCoroutine = null;
             }
         }
+    }
+
+    public override void KillCharacter()
+    {
+        animator.SetBool("isDead", true);
+        Destroy(gameObject, .667f);
     }
 }

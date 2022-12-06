@@ -9,9 +9,10 @@ public class MovementController : MonoBehaviour
     public float jumpGravity = 10;
     public float fallingGravity = 40;
     public float movementSpeed = 3.0f;
-
+    
     // holds 2D points; used to represent a character's location in 2D space, or where it's moving to
-    private float movement;
+    //private float movement;
+    private Vector2 movement = new Vector2();
 
     // holds reference to the animator component in the game object
     Animator animator;
@@ -41,8 +42,7 @@ public class MovementController : MonoBehaviour
         }
 
         // update the animation state machine
-        //UpdateState();
-
+        UpdateState();
     }
 
     // called at fixed intervals by the Unity engine
@@ -62,17 +62,12 @@ public class MovementController : MonoBehaviour
         }
         
         MoveCharacter();
-        /*if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            Debug.Log("Here!");
-        }*/
     }
 
-    /*private void UpdateState()
+    private void UpdateState()
     {
         // Check to see if the movement vector is approximately equal to (0, 0) -- i.e. player is standing still
-        if (Mathf.Approximately(movement.x, 0) && Mathf.Approximately(movement.y, 0))
+        if (Mathf.Approximately(movement.x, 0))
         {
             animator.SetBool("isWalking", false);
         }
@@ -83,8 +78,7 @@ public class MovementController : MonoBehaviour
 
         // Update the animator with the new movement values
         animator.SetFloat("xDir", movement.x);
-        animator.SetFloat("yDir", movement.y);
-    }*/
+    }
     
 
     private bool CanJump()
@@ -106,14 +100,14 @@ public class MovementController : MonoBehaviour
         // Returns 1 = right key or "d" (up key or "w")
         //        -1 = left key or "a"  (down key or "s")
         //         0 = no key pressed
-        movement = Input.GetAxisRaw("Horizontal");
+        movement.x = Input.GetAxisRaw("Horizontal");
         //movement.y = Input.GetAxisRaw("Vertical");
         
         // keeps player moving at the same rate of speed, no matter which direction they are moving in
         //movement.Normalize();
 
         // set velocity of RigidBody2D and move it
-        rb2D.velocity = new Vector2(movement * movementSpeed, rb2D.velocity.y);
+        rb2D.velocity = new Vector2(movement.x * movementSpeed, rb2D.velocity.y);
         
     }
 }
