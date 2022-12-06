@@ -32,6 +32,7 @@ public class Wander : MonoBehaviour
     // Components attached to the game object
     Rigidbody2D rb2d;
     Animator animator;
+    private AudioSource pursuitMusic;
 
     // The player's transform (position)
     Transform targetTransform = null;
@@ -50,6 +51,7 @@ public class Wander : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         StartCoroutine(WanderRoutine());
         circleCollider = GetComponent<CircleCollider2D>();
+        pursuitMusic = GetComponent<AudioSource>();
     }
 
     private void OnDrawGizmos()
@@ -149,6 +151,12 @@ public class Wander : MonoBehaviour
     // Called when player enters the circle collider for the enemy
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            GameObject.Find("BackgroundMusic").GetComponent<AudioSource>().Stop();
+            pursuitMusic.Play();
+        }
+        
         // See if the object that the enemy has collided with is the player and
         // that the enemy is supposed to be following the player
         if (collision.gameObject.CompareTag("Player") && followPlayer)
@@ -175,6 +183,12 @@ public class Wander : MonoBehaviour
     // Can only happen if player can move faster than the enemy
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            pursuitMusic.Stop();
+            GameObject.Find("BackgroundMusic").GetComponent<AudioSource>().Play();
+        }
+        
         // See if the object that the enemy is no longer colliding with is the player
         if (collision.gameObject.CompareTag("Player"))
         {

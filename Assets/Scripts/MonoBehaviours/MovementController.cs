@@ -17,6 +17,8 @@ public class MovementController : MonoBehaviour
     // holds reference to the animator component in the game object
     Animator animator;
 
+    AudioSource audio;
+
     // reference to the character's Rigidbody2D component
     Rigidbody2D rb2D;
     private BoxCollider2D bc2D;
@@ -29,7 +31,8 @@ public class MovementController : MonoBehaviour
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
         bc2D = GetComponent<BoxCollider2D>();
-        
+        audio = GetComponent<AudioSource>();
+
     }
 
     // called once per frame
@@ -39,6 +42,7 @@ public class MovementController : MonoBehaviour
         {
             
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            audio.Play();
         }
 
         // update the animation state machine

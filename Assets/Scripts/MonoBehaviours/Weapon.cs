@@ -15,9 +15,12 @@ public class Weapon : MonoBehaviour
     // Velocity of ammo fired from the weapon
     public float weaponVelocity;
 
+    private AudioSource audio;
+
     // Called when the script is being loaded
     private void Awake()
     {
+        audio = gameObject.GetComponent<AudioSource>();
         if (ammoPool == null)
         {
             // Create the pool
@@ -85,6 +88,11 @@ public class Weapon : MonoBehaviour
         // Make sure you got an ammo object
         if (ammo != null)
         {
+            if (gameObject.tag == "Ammo")
+            {
+                audio.Play();
+            }
+            
             // Get reference to the arc script
             Arc arcScript = ammo.GetComponent<Arc>();
 
