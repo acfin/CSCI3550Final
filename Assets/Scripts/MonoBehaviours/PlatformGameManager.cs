@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cinemachine;
+using UnityEditor;
 using UnityEngine.UIElements;
 
 public class PlatformGameManager : MonoBehaviour
@@ -15,10 +16,14 @@ public class PlatformGameManager : MonoBehaviour
     public static PlatformGameManager sharedInstance = null;
 
     public Canvas GameOverCanvas;
-    public Canvas WinCanvas;
+    public Canvas VictoryCanvas;
+    public Canvas ObjectiveCanvas;
     
     private bool created = false;
     private Canvas gameOver;
+
+    private float currentOpacity = 1;
+    private float desireddOpacity = 0;
 
     // Ensure only a single instance of the RPGGameManager exists
     // It's possible to get multiple instances if multiple copies of the RPGGameManager exists in the Hierarchy
@@ -64,16 +69,19 @@ public class PlatformGameManager : MonoBehaviour
             virtualCamera.Follow = player.transform;
         }
     }
-    
+
     private void Update()
     {
+        currentOpacity = Mathf.MoveTowards(currentOpacity, desireddOpacity, 0.2f * Time.deltaTime);
+        ObjectiveCanvas.GetComponent<CanvasGroup>().alpha = currentOpacity;
+        
         // Exit the application if the user presses the "escape" key
         // Does not work when playing from inside the Unity editor
         if (Input.GetKey("escape"))
         {
             Application.Quit();
         }
-        
+
         // Respawn if dead by pressing R
         if (!GameObject.FindGameObjectWithTag("Player"))
         {
@@ -87,6 +95,15 @@ public class PlatformGameManager : MonoBehaviour
                 SetupScene();
                 Destroy(gameOver.gameObject);
                 created = false;
+            }
+        }
+
+        if (!GameObject.FindGameObjectWithTag("Enemy"))
+        {
+            if (!created)
+            {
+                gameOver = Instantiate(VictoryCanvas);
+                created = true;
             }
         }
     }
