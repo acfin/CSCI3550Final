@@ -1934,6 +1934,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 304052807, guid: ef4e31b0aad025343b57e6663b44ad0e, type: 3}
+      propertyPath: wanderSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 587859965791687958, guid: ef4e31b0aad025343b57e6663b44ad0e, type: 3}
       propertyPath: m_Volume
       value: 0.3
