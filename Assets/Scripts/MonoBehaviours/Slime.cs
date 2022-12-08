@@ -27,7 +27,10 @@ public class Slime : Enemy
         if (!isDead)
         {
             if (playerT == null)
-                playerT = GameObject.Find("PlayerObject(Clone)").GetComponent<Transform>();
+                if (GameObject.Find("PlayerObject(Clone)"))
+                {
+                    playerT = GameObject.Find("PlayerObject(Clone)").GetComponent<Transform>();
+                }
             JumpToPlayer();
             CheckAlive();
         }
@@ -49,18 +52,21 @@ public class Slime : Enemy
 
     void JumpToPlayer()
     {
-        float distanceToPlayer = Vector3.Distance(playerT.position, gameObject.transform.position);
-        if (distanceToPlayer < 7)
+        if (playerT)
         {
-            if (!isAttacking)
+            float distanceToPlayer = Vector3.Distance(playerT.position, gameObject.transform.position);
+            if (distanceToPlayer < 7)
             {
-                Attack(playerT.position);
-                isAttacking = true;
-            }
+                if (!isAttacking)
+                {
+                    Attack(playerT.position);
+                    isAttacking = true;
+                }
 
+            }
+            else
+                Idle();
         }
-        else
-            Idle();
     }
 
     void Attack(Vector3 player)
