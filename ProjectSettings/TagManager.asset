@@ -47,6 +47,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background-Farthest
+    uniqueID: 2059104489
+    locked: 0
+  - name: Background-Far
+    uniqueID: 4230362537
+    locked: 0
+  - name: Background-Near
+    uniqueID: 2113837829
+    locked: 0
+  - name: Background-Nearest
+    uniqueID: 1502021795
+    locked: 0
   - name: Sky
     uniqueID: 3704681259
     locked: 0

@@ -2,6 +2,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEditor;
 using UnityEngine.UIElements;
+using EasyParallax;
 
 public class PlatformGameManager : MonoBehaviour
 {
@@ -24,6 +25,12 @@ public class PlatformGameManager : MonoBehaviour
 
     private float currentOpacity = 1;
     private float desireddOpacity = 0;
+
+    //Background Stuff
+    public MovementSpeedType backgroundFarthest;
+    public MovementSpeedType backgroundFar;
+    public MovementSpeedType backgroundNear;
+    public MovementSpeedType backgroundNearest;
 
     // Ensure only a single instance of the RPGGameManager exists
     // It's possible to get multiple instances if multiple copies of the RPGGameManager exists in the Hierarchy

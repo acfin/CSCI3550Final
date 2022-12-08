@@ -1,3 +1,4 @@
+using EasyParallax;
 using System;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ public class MovementController : MonoBehaviour
 
     // reference to the character's Rigidbody2D component
     Rigidbody2D rb2D;
-    private BoxCollider2D bc2D;
+    private CapsuleCollider2D bc2D;
     Coroutine damageCoroutine;
 
     // use this for initialization
@@ -30,7 +31,7 @@ public class MovementController : MonoBehaviour
         // get references to game object components so they don't have to be grabbed each time they are needed
         animator = GetComponent<Animator>();
         rb2D = GetComponent<Rigidbody2D>();
-        bc2D = GetComponent<BoxCollider2D>();
+        bc2D = GetComponent<CapsuleCollider2D>();
         audio = GetComponent<AudioSource>();
 
     }
@@ -112,6 +113,6 @@ public class MovementController : MonoBehaviour
 
         // set velocity of RigidBody2D and move it
         rb2D.velocity = new Vector2(movement.x * movementSpeed, rb2D.velocity.y);
-        
+        //SetBackgroundSpeed(movement.x);
     }
 }
