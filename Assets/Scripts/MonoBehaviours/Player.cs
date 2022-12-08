@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : Character
@@ -25,6 +26,11 @@ public class Player : Character
     private void OnEnable()
     {
         ResetCharacter();
+    }
+
+    private void Update()
+    {
+        VictoryCheck();
     }
 
     // Called when player's collider touches an "Is Trigger" collider
@@ -100,7 +106,15 @@ public class Player : Character
         // Call KillCharacter in parent(Character) class, which will destroy the player game object
         base.KillCharacter();
 
-        // Destroy health and inventory bars
+        // Destroy health
         Destroy(healthBar.gameObject);
+    }
+
+    public void VictoryCheck()
+    {
+        if (!GameObject.FindGameObjectWithTag("Enemy"))
+        {
+            KillCharacter();
+        }
     }
 }

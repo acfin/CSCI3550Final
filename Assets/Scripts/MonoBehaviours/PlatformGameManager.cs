@@ -72,7 +72,7 @@ public class PlatformGameManager : MonoBehaviour
 
     private void Update()
     {
-        currentOpacity = Mathf.MoveTowards(currentOpacity, desireddOpacity, 0.2f * Time.deltaTime);
+        currentOpacity = Mathf.MoveTowards(currentOpacity, desireddOpacity, 0.1f * Time.deltaTime);
         ObjectiveCanvas.GetComponent<CanvasGroup>().alpha = currentOpacity;
         
         // Exit the application if the user presses the "escape" key
@@ -83,7 +83,7 @@ public class PlatformGameManager : MonoBehaviour
         }
 
         // Respawn if dead by pressing R
-        if (!GameObject.FindGameObjectWithTag("Player"))
+        if (!GameObject.FindGameObjectWithTag("Player") && GameObject.FindGameObjectWithTag("Enemy"))
         {
             if (!created)
             {
